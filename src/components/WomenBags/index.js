@@ -16,7 +16,7 @@ const WomenBags =()=>{
     const fetchdata= async()=>{
 
         try{
-        const response=await axios.get("http://localhost:7000/api/womens", { port: 3000 })
+        const response=await axios.get("https://salesbackend-9m1v.onrender.com/api/womens")
         setMenbags(response.data);
     }   catch (error){
         console.error(error)
