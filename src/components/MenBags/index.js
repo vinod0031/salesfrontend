@@ -1,12 +1,13 @@
 import React ,{useState,useEffect}from "react";
 import "./index.css";
 import axios from "axios";
-
+import ClipLoader from "react-spinners/ClipLoader";
 
 const MenBags =()=>{
 
 
     const [menbags ,setMenbags]=useState([]);
+    const [spinner, setSpinner] = useState(true);
 
     useEffect(()=>{
         fetchdata()
@@ -17,6 +18,7 @@ const MenBags =()=>{
 
         try{
         const response=await axios.get("https://salesbackend-9m1v.onrender.com/api/items")
+        setSpinner(false);
         setMenbags(response.data);
     }   catch (error){
         console.error(error)
@@ -29,6 +31,16 @@ const MenBags =()=>{
 
     return (<div>
         <h1 style={{color:"#383542" ,fontFamily:"cursive"}}>Men's Bags</h1>
+        <div style={{display:"flex",flexDirection:"row",justifyContent:"center"}}>
+            <ClipLoader
+                size={100} // Adjust size as needed
+                color={"#123abc"} // Adjust color as needed
+                loading={spinner}
+                css={{ // Add custom styles here
+                    margin: "0 auto", // Center the spinner horizontally
+                    display: spinner ? "block" : "none" // Show spinner only when loading
+                }}
+            /></div>
         
         <ul className="container">
             {menbags.map(bag=>(
